@@ -8,33 +8,33 @@ unzip("project.zip")
 features <- read.table("UCI HAR Dataset/features.txt", 
 		       col.names = c("n", "functions"))
 activities <- read.table("UCI HAR Dataset/activity_labels.txt", 
-			 col.names = c("code", "activity"))
+			 col.names = c("activity_number", "activity"))
 x_test <- read.table("UCI HAR Dataset/test/X_test.txt", 
 		     col.names = features$functions)
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt", 
 			   col.names = "subject")
 y_test <- read.table("UCI HAR Dataset/test/y_test.txt", 
-		     col.names = "code")
+		     col.names = "activity_number")
 x_train <- read.table("UCI HAR Dataset/train/X_train.txt", 
 		      col.names = features$functions)
 subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt", 
 			    col.names = "subject")
-y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "code")
+y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
 
 ## Merges the training and the test sets to create one data set.
-x <- rbind(x_test, x_train)
-y <- rbind(y_test, y_train)
+x_data <- rbind(x_test, x_train)
+y_data <- rbind(y_test, y_train)
 subject <- rbind(subject_test, subject_train)
-merge<-cbind(x, y, subject)
+merge <- cbind(x_data, y_data, subject)
 
 ## Extracts only the measurements on the mean and 
 ## standard deviation for each measurement. 
-data <- select(merge, subject, code, contains("mean"), contains("std"))
+data <- select(merge, subject, activity_number, contains("mean"), contains("std"))
 
 ## Uses descriptive activity names to name the activities in the data set
 activities$activity <- tolower(activities$activity)
 activities$activity <- gsub("_" , " " , activities$activity)
-data$code <- activities[data$code, 2]
+data$activity_number <- activities[data$activity_number, 2]
 
 ## Appropriately labels the data set with descriptive variable names. 
 names(data)[1] = "Subject"

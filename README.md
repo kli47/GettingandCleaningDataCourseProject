@@ -18,36 +18,36 @@ unzip("project.zip")
 
 features <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/features.txt", col.names = c("n", "functions"))
 
-activities <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/activity_labels.txt", col.names = c("code", "activity"))
+activities <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/activity_labels.txt", col.names = c("activity_number", "activity"))
 
 x_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/X_test.txt", col.names = features$functions)
 
 subject_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
 
-y_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/y_test.txt", col.names = "code")
+y_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/y_test.txt", col.names = "activity_number")
 
 x_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/X_train.txt", col.names = features$functions)
 
 subject_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
 
-y_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/y_train.txt", col.names = "code")
+y_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
 # loads each data set file into R with column names as indicated by README.txt in UCI HAR Dataset folder 
 
-x <- rbind(x_test, x_train)
+x_data <- rbind(x_test, x_train)
 # uses rbind to make df of both the training and test sets of data 
 
-y <- rbind(y_test, y_train)
+y_data <- rbind(y_test, y_train)
 # uses rbind to make df containing all the labels of training and test groups
 
 subject <- rbind(subject_test, subject_train)
 # uses rbind to create a df with all the subjects from the test and train groups
 
-merge<-cbind(x, y, subject)
+merge <- cbind(x_data, y_data, subject)
 # cbind combines all columns to give a df with subjects, 
 
 # Extracts only the measurements on the mean and standard deviation for each measurement. 
-data <- select(merge, subject, code, contains("mean"), contains("std"))
-# uses dpylr select function to select() subject, code, and all columns containing "mean" or "std" using the selection helper contains(). This generates a data set (data) with the aforementioned columns
+data <- select(merge, subject, activity_number, contains("mean"), contains("std"))
+# uses dpylr select function to select() subject, activity number, and all columns containing "mean" or "std" using the selection helper contains(). This generates a data set (data) with the aforementioned columns
 
 # Uses descriptive activity names to name the activities in the data set
 activities$activity <- tolower(activities$activity)
@@ -56,7 +56,7 @@ activities$activity <- tolower(activities$activity)
 activities$activity <- gsub("_" , " " , activities$activity)
 # replaces underscores in activity names with spaces for readability
 
-data$code <- activities[data$code, 2]
+data$activity_number <- activities[data$activity_number, 2]
 # changes code column of data df to the modified 
 
 # Appropriately labels the data set with descriptive variable names. 
