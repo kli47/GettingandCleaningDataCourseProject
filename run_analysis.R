@@ -1,5 +1,7 @@
 library(dplyr)
 ## dplyr version 1.0.7
+library(tidyr)
+## tidyr version 1.1.3
 
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(url, destfile = "project.zip", method = "curl")
@@ -56,5 +58,10 @@ names(data) <- gsub("...Z", "Z-Axis", names(data))
 
 ## From the data set in step 4, creates a second, independent tidy data set 
 ## with the average of each variable for each activity and each subject
-tidy_data <- group_by(data, Subject, Activity) %>% summarize_all(mean)
+tidy_data <- group_by(data, Activity, Subject) %>% 
+	summarize_all(mean, na.rm = TRUE)
+
+exclude <- c("Subject", "Activity")
+tidy_data <- tidy_data %>% gather(Feature, Mean, -exclude)
+
 write.table(tidy_data, "tidy_data.txt", row.names = FALSE)

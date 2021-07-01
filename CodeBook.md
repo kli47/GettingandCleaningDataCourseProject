@@ -3,7 +3,7 @@ Code book for Getting and Cleaning Data Course Project
 
 This markdown file explains the variables, data, and transformations preformed in run_analysis.R.
 
-# 0. Load requites packages: we load dplyr package (version 1.0.7) for use
+# 0. Load requites packages: we load dplyr package (version 1.0.7) and tidyr (version 1.1.3)
 
 # 1. Download and inspect dataset
 Dataset downloaded from provided link "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -196,7 +196,6 @@ We use dplyr function group_by() to group by activity and subject
 We use dplyr function summarize_all() to apply function mean() to 
 create the data frame tidy_data
 
-tidy_data is a data frame of 180 rows and 88 columns with the means of each
-variable fo reach activity and each subject 
+We use gather() to reshape wide data into long data
 
 We then export the data frame to the directory with write.table()
