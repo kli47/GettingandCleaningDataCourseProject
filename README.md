@@ -4,8 +4,9 @@ README.md for Getting and Cleaning Data Course Project
 This README.md explains how all the scripts in run_analysis.R work and how they are connected. run_analysis.R is copied in full below
 
 ------
-# loads R dplyr package. various functions in package are utilized in the below code including select, group_by, summarize, etc. dplyr version 1.0.7 was used. 
+# loads dplyr (version 1.0.7) and tidyr (version 1.1.3)
 library(dplyr)
+library(tidyr)
 
 # downloads Human Activity Recognition Using Smartphones Data Set from provided link and unzips file creating folder UCI HAR Dataset with in working directory
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
