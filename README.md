@@ -1,5 +1,5 @@
 README.md for Getting and Cleaning Data Course Project
--Kevin Li (github: kli47) 6/30/21 
+-Kevin Li (github: kli47) 7/1/21 
 
 This README.md explains how all the scripts in run_analysis.R work and how they are connected. run_analysis.R is copied in full below
 
@@ -16,33 +16,34 @@ download.file(url, destfile = "project.zip", method = "curl")
 unzip("project.zip")
 
 # loads each data set file into R with column names as indicated by README.txt in UCI HAR Dataset folder 
-features <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/features.txt", col.names = c("n", "feature"))
 
-activities <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/activity_labels.txt", col.names = c("activity_number", "activity"))
+features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n", "feature"))
 
-x_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/X_test.txt", col.names = features$feature)
+activities <- read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("activity_number", "activity"))
 
-subject_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
+test_subjects <- read.table("UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
 
-y_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/y_test.txt", col.names = "activity_number")
+train_subjects <- read.table("UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
 
-x_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/X_train.txt", col.names = features$feature)
+test_data <- read.table("UCI HAR Dataset/test/X_test.txt", col.names = features$feature)
 
-subject_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
+train_data <- read.table("UCI HAR Dataset/train/X_train.txt", col.names = features$feature)
 
-y_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
+test_labels <- read.table("UCI HAR Dataset/test/y_test.txt", col.names = "activity_number")
+
+train_labels <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
 
 # uses rbind to make df of both the training and test sets of data 
-x_data <- rbind(x_test, x_train)
+combined_data <- rbind(test_data, train_data)
 
 # uses rbind to make df containing all the labels of training and test groups
-y_data <- rbind(y_test, y_train)
+labels <- rbind(test_labels, train_labels)
 
 # uses rbind to create a df with all the subjects from the test and train groups
-subject <- rbind(subject_test, subject_train)
+subjects <- rbind(test_subjects, train_subjects)
 
 # cbind combines all columns to give a df with subjects, activity numbers, and features
-merge <- cbind(x_data, y_data, subject)
+merge <- cbind(combined_data, labels, subjects)
 
 # uses dpylr select function to select() subject, activity number, and all columns containing "mean" or "std" using the selection helper contains(). This generates a data set (data) with the aforementioned columns
 data <- select(merge, subject, activity_number, contains("mean"), contains("std"))

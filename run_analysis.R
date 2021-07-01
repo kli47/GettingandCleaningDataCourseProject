@@ -11,23 +11,23 @@ features <- read.table("UCI HAR Dataset/features.txt",
 		       col.names = c("n", "feature"))
 activities <- read.table("UCI HAR Dataset/activity_labels.txt", 
 			 col.names = c("activity_number", "activity"))
-x_test <- read.table("UCI HAR Dataset/test/X_test.txt", 
-		     col.names = features$feature)
-subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt", 
+test_subjects <- read.table("UCI HAR Dataset/test/subject_test.txt", 
 			   col.names = "subject")
-y_test <- read.table("UCI HAR Dataset/test/y_test.txt", 
+train_subjects <- read.table("UCI HAR Dataset/train/subject_train.txt", 
+			     col.names = "subject")
+test_data <- read.table("UCI HAR Dataset/test/X_test.txt", 
+		     col.names = features$feature)
+train_data <- read.table("UCI HAR Dataset/train/X_train.txt", 
+			 col.names = features$feature)
+test_labels <- read.table("UCI HAR Dataset/test/y_test.txt", 
 		     col.names = "activity_number")
-x_train <- read.table("UCI HAR Dataset/train/X_train.txt", 
-		      col.names = features$feature)
-subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt", 
-			    col.names = "subject")
-y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
+train_labels <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "activity_number")
 
 ## Merges the training and the test sets to create one data set.
-x_data <- rbind(x_test, x_train)
-y_data <- rbind(y_test, y_train)
-subject <- rbind(subject_test, subject_train)
-merge <- cbind(x_data, y_data, subject)
+combined_data <- rbind(test_data, train_data)
+labels <- rbind(test_labels, train_labels)
+subjects <- rbind(test_subjects, train_subjects)
+merge <- cbind(combined_data, labels, subjects)
 
 ## Extracts only the measurements on the mean and 
 ## standard deviation for each measurement. 
