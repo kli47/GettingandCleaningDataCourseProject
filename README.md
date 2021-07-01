@@ -33,8 +33,7 @@ subject <- rbind(subject_test, subject_train)
 merge<-cbind(x, y, subject)
 ## cbind combines all columns to give a df with subjects, 
 
-## Extracts only the measurements on the mean and 
-## standard deviation for each measurement. 
+## Extracts only the measurements on the mean and standard deviation for each measurement. 
 data <- select(merge, subject, code, contains("mean"), contains("std"))
 ## uses dpylr select function to select() subject, code, and all columns containing "mean" or "std" using the selection helper contains(). This generates a data set (data) with the aforementioned columns
 

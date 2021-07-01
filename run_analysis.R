@@ -5,21 +5,21 @@ url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR
 download.file(url, destfile = "project.zip", method = "curl")
 unzip("project.zip")
 
-features <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/features.txt", 
+features <- read.table("UCI HAR Dataset/features.txt", 
 		       col.names = c("n", "functions"))
-activities <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/activity_labels.txt", 
+activities <- read.table("UCI HAR Dataset/activity_labels.txt", 
 			 col.names = c("code", "activity"))
-x_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/X_test.txt", 
+x_test <- read.table("UCI HAR Dataset/test/X_test.txt", 
 		     col.names = features$functions)
-subject_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/subject_test.txt", 
+subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt", 
 			   col.names = "subject")
-y_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/y_test.txt", 
+y_test <- read.table("UCI HAR Dataset/test/y_test.txt", 
 		     col.names = "code")
-x_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/X_train.txt", 
+x_train <- read.table("UCI HAR Dataset/train/X_train.txt", 
 		      col.names = features$functions)
-subject_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/subject_train.txt", 
+subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt", 
 			    col.names = "subject")
-y_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/y_train.txt", col.names = "code")
+y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "code")
 
 ## Merges the training and the test sets to create one data set.
 x <- rbind(x_test, x_train)
