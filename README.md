@@ -4,8 +4,7 @@ README.md for Getting and Cleaning Data Course Project
 This README.md explains how all the scripts in run_analysis.R work and how they are connected. run_analysis.R is copied in full below
 
 ------
-# loads R dplyr package, various functions are utilized in the below code including select, group_by, summarize, etc. 
-# dplyr version 1.0.7 was used at the time of creation of this README.md
+# loads R dplyr package, various functions are utilized in the below code including select, group_by, summarize, etc. dplyr version 1.0.7 was used at the time of creation of this README.md
 library(dplyr)
 
 # downloads Human Activity Recognition Using Smartphones Data Set and unzips fill creating folder UCI HAR Dataset with in default RStudio Working Directory
@@ -47,7 +46,7 @@ merge <- cbind(x_data, y_data, subject)
 # uses dpylr select function to select() subject, activity number, and all columns containing "mean" or "std" using the selection helper contains(). This generates a data set (data) with the aforementioned columns
 data <- select(merge, subject, activity_number, contains("mean"), contains("std"))
 
-# changes activity names to lower case for readability (was originally entirally capitalized)
+# changes activity names to lower case for readability (was originally capitalized)
 activities$activity <- tolower(activities$activity)
 
 # replaces underscores in activity names with spaces for readability
@@ -56,8 +55,7 @@ activities$activity <- gsub("_" , " " , activities$activity)
 # changes code column of data df to the modified 
 data$activity_number <- activities[data$activity_number, 2]
 
-# this section utilizes names() and the gsub() function to replace identified arguments with clearer variable names. Note the use of ^t and ^f to only capture t and f in the beginning of the variable name.
-# Modified variable names were made in accordance to features_info.txt in the original UCI HAR Dataset folder. They were largely abbreviations.
+# Modified variable names for clarity. New names were primarly taken from features_info.txt in the original UCI HAR Dataset folder. This largely involved expanding abbreviations. This section utilizes names() and the gsub() function to replace identified arguments with clearer variable names. Note the use of ^t and ^f to only capture t and f in the beginning of the variable name.
 names(data)[1] = "Subject"
 
 names(data)[2] = "Activity"
