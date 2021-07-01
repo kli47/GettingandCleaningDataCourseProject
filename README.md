@@ -16,17 +16,17 @@ download.file(url, destfile = "project.zip", method = "curl")
 unzip("project.zip")
 
 # loads each data set file into R with column names as indicated by README.txt in UCI HAR Dataset folder 
-features <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/features.txt", col.names = c("n", "functions"))
+features <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/features.txt", col.names = c("n", "feature"))
 
 activities <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/activity_labels.txt", col.names = c("activity_number", "activity"))
 
-x_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/X_test.txt", col.names = features$functions)
+x_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/X_test.txt", col.names = features$feature)
 
 subject_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
 
 y_test <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/test/y_test.txt", col.names = "activity_number")
 
-x_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/X_train.txt", col.names = features$functions)
+x_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/X_train.txt", col.names = features$feature)
 
 subject_train <- read.table("/Users/Kevin/RStudio/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
 
