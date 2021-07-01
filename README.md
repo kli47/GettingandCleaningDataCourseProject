@@ -96,8 +96,9 @@ names(data) <- gsub("...Z", "Z-Axis", names(data))
 
 # From the data set in step 4, creates a second, independent tidy data set
 # with the average of each variable for each activity and each subject.
+
 tidy_data <- group_by(data, Subject, Activity) %>% summarize_all(mean)
+# uses the dpylr group_by() function to group data df by Subject and Activity as instructed. Then used summarize_all(), a scoped variant of summarize(), to select every variable and take the mean. Creates new df tidy_data to store this data.
 
 write.table(tidy_data, "tidy_data.txt", row.names = FALSE)
-# uses the dpylr group_by() function to group data df by Subject and Activity as instructed. Then used summarize_all(), a scoped variant of summarize(), to select every variable and take the mean. Creates new df tidy_data to store this data.
 # creates new file called "tidy_data.txt" in default working directory, we do not have meaningful row names to retain

@@ -51,7 +51,7 @@ Note: the volunteers in this data were split between a train group
 have distinct data sets.
 
 Data is stored according to the following variables 
-features <- features.txt 
+features <- features.txt
 
 a data frame of 561 rows and 2 columns. Columns are named n (to count the
 feature number) and feature (to display the feature name). 
@@ -198,4 +198,4 @@ create the data frame tidy_data
 tidy_data is a data frame of 180 rows and 88 columns with the means of each
 variable fo reach activity and each subject 
 
-We then export the data by writing the table to our directory.
+We then export the data frame to the directory with write.table()

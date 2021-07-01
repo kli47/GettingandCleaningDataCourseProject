@@ -55,6 +55,6 @@ names(data) <- gsub("...Y", "Y-Axis", names(data))
 names(data) <- gsub("...Z", "Z-Axis", names(data))
 
 ## From the data set in step 4, creates a second, independent tidy data set 
-## with the average of each variable for each activity and each subject.
+## with the average of each variable for each activity and each subject
 tidy_data <- group_by(data, Subject, Activity) %>% summarize_all(mean)
 write.table(tidy_data, "tidy_data.txt", row.names = FALSE)
