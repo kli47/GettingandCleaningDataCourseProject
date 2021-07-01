@@ -51,6 +51,7 @@ Note: the volunteers in this data were split between a train group
 have distinct data sets.
 
 Data is stored according to the following variables 
+
 features <- features.txt
 
 a data frame of 561 rows and 2 columns. Columns are named n (to count the
